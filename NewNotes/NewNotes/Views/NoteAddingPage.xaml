@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NewNotes.Views.NoteAddingPage">
+    <ContentPage.Resources>
+        <!-- Implicit styles -->
+        <Style TargetType="{x:Type Editor}">
+            <Setter Property="BackgroundColor"
+                    Value="{StaticResource AppBackgroundColor}" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Сохранить"
+                     Clicked="OnSaveButton_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        
+        <StackLayout>
+            <StackLayout Margin="20">
+
+                <Editor Placeholder="Текст заметки"
+                        PlaceholderColor="Gray"
+                        Text="{Binding Text}"
+                        TextColor="Black"
+                        AutoSize="TextChanges"
+                        />
+
+                <Grid ColumnDefinitions="*,*">
+                    
+
+                    <Button Grid.Column="1"
+                            Text="Удалить"
+                            Clicked="OnDeleteButton_Clicked"/>
+
+                </Grid>
+                
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
