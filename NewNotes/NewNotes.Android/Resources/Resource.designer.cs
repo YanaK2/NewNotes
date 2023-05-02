@@ -16537,6 +16537,9 @@ namespace NewNotes.Droid
 			// aapt resource value: 0x7F070065
 			public const int design_snackbar_background = 2131165285;
 			
+			// aapt resource value: 0x7F07006D
+			public const int icon = 2131165293;
+			
 			// aapt resource value: 0x7F070066
 			public const int ic_arrow_down_24dp = 2131165286;
 			
@@ -16557,9 +16560,6 @@ namespace NewNotes.Droid
 			
 			// aapt resource value: 0x7F07006C
 			public const int ic_mtrl_chip_close_circle = 2131165292;
-			
-			// aapt resource value: 0x7F07006D
-			public const int logo = 2131165293;
 			
 			// aapt resource value: 0x7F07006E
 			public const int material_cursor_drawable = 2131165294;

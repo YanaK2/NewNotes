@@ -31,10 +31,9 @@
     <CollectionView x:Name="collectionView"
                     Margin="20"
                     SelectionMode="Single"
-                    SelectionChanged="OnSelectionChanged"
-                     SelectedItem="SelectedItem_Note">
-        
-     <CollectionView.ItemsLayout>
+                    SelectionChanged="OnSelectionChanged">
+
+        <CollectionView.ItemsLayout>
             <LinearItemsLayout Orientation="Vertical"
                            ItemSpacing="10"/>
         </CollectionView.ItemsLayout>
