@@ -25,7 +25,7 @@
         <ShellContent
            
             Title="Заметки"
-            Icon="Note1.png"
+            Icon="note.png"
             ContentTemplate="{DataTemplate views:NotesPage}">
 
         </ShellContent>
