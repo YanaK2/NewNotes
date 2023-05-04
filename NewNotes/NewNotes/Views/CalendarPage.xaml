@@ -1,21 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:xc="clr-namespace:XCalendar.Forms.Views;assembly=XCalendar.Forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:xc="clr-namespace:XCalendar;assembly=XCalendar"
              x:Class="NewNotes.Views.CalendarPage"
-             x:DataType="{x:Type xc:CalendarView}"
-             
              Title="Календарь">
 
     <ContentPage.Content>
         <StackLayout>
-            <xc:CalendarView
-                 BackgroundColor="Black"
-              ></xc:CalendarView>
+            <xc:CalendarView x:Name="calendar"
+                             SelectionType="Single"
+                             SelectionAction="Replace"
+                             DateSelectionChanged="CalendarView_DateSelectionChanged"
+                             NavigationBackgroundColor="#79B989" />
             <StackLayout>
+
+                <ScrollView>
+                    <Editor Placeholder="Текст заметки"
+                        PlaceholderColor="Gray"
+                        Text="{Binding Text}"
+                        TextColor="Black"
+                        AutoSize="TextChanges"/>
+
+
+
+                </ScrollView>
+                <StackLayout>
+                    <Button 
+                            HorizontalOptions="End" 
+                            HeightRequest="50" 
+                            BackgroundColor="#79B989"  
+                            CornerRadius="30" 
+                            Text="Сохранить"
+                            Margin="5"
+                            Clicked="SaveButton_Clicked"
+                            />
+                </StackLayout>
             </StackLayout>
-            
+
         </StackLayout>
-        
+
     </ContentPage.Content>
 </ContentPage>

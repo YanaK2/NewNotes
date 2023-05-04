@@ -27,6 +27,8 @@ namespace NewNotes.Data
             return db.Table<Note>().Where(i=>i.ID == id).FirstOrDefaultAsync();
         }
 
+
+
         public Task<int> SaveNoteAsync(Note note) {
         
         if(note.ID!=0)

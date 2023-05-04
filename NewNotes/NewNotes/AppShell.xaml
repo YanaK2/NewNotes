@@ -45,6 +45,7 @@
             ContentTemplate="{DataTemplate views:AboutPage}">
 
         </ShellContent>
+
     </TabBar>
     
 </Shell>

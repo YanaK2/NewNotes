@@ -22,7 +22,8 @@
                     Value="{StaticResource AppBackgroundColor}" />
         </Style>
 
-        <Style TargetType="Button">
+        <Style TargetType="Button"
+               x:Key="ButtonStyle">
             <Setter Property="FontSize"
                     Value="Medium" />
             <Setter Property="BackgroundColor"
