@@ -11,14 +11,17 @@
                              SelectionAction="Replace"
                              DateSelectionChanged="CalendarView_DateSelectionChanged"
                              NavigationBackgroundColor="#79B989" />
-            <StackLayout>
+            <StackLayout x:Name="NotePlace" IsVisible="false">
 
                 <ScrollView>
-                    <Editor Placeholder="Текст заметки"
+                    <Editor x:Name="InputNote"
+                        Placeholder="Текст заметки"
                         PlaceholderColor="Gray"
                         Text="{Binding Text}"
                         TextColor="Black"
-                        AutoSize="TextChanges"/>
+                        AutoSize="TextChanges"
+                        
+                            />
 
 
 

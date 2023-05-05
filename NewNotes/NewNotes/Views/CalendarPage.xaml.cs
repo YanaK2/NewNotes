@@ -32,7 +32,8 @@ namespace NewNotes.Views
              string Selectedate = calendar.SelectedDates.Single().Date.ToString();
              DisplayAlert("Title", Selectedate, "OK");
 
-           
+            NotePlace.IsVisible = true;
+            InputNote.Text="";
                 
                /* Note note = (Note)e.CurrentSelection.FirstOrDefault();
                 await Shell.Current.GoToAsync(
@@ -58,6 +59,11 @@ namespace NewNotes.Views
             Note note = (Note)BindingContext;
 
             note.Date = calendar.SelectedDates.Single().Date;
+
+            if (note.Date == null) 
+            { 
+                note.Date = DateTime.Now;
+            } else note.Date = calendar.SelectedDates.Single().Date;
 
             if (!string.IsNullOrWhiteSpace(note.Text))
             {
