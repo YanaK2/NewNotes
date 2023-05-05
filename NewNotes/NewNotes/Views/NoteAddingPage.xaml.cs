@@ -64,6 +64,8 @@ namespace NewNotes.Views
             await App.NotesDB.DeleteNoteAsync(note);
 
             await Shell.Current.GoToAsync("..");
+
+            await DisplayAlert("Уведомление", "Заметка удалена", "OK");
         }
     }
 }

@@ -3,13 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:xc="clr-namespace:XCalendar;assembly=XCalendar"
              x:Class="NewNotes.Views.CalendarPage"
              Title="Календарь">
-
+    <ContentPage.Resources>
+        <!-- Define a visual state for the Selected state of the CollectionView -->
+        <Style TargetType="StackLayout">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="#E0ECF8" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <xc:CalendarView x:Name="calendar"
                              SelectionType="Single"
                              SelectionAction="Replace"
                              DateSelectionChanged="CalendarView_DateSelectionChanged"
+                             Rows="6"
                              NavigationBackgroundColor="#79B989" />
             <StackLayout x:Name="NotePlace" IsVisible="false">
 
@@ -20,11 +38,7 @@
                         Text="{Binding Text}"
                         TextColor="Black"
                         AutoSize="TextChanges"
-                        
                             />
-
-
-
                 </ScrollView>
                 <StackLayout>
                     <Button 
@@ -38,7 +52,28 @@
                             />
                 </StackLayout>
             </StackLayout>
-
+            <StackLayout>
+                <CollectionView x:Name="collectionView"
+                    Margin="20"
+                                HeightRequest="250"
+                    SelectionMode="Single"
+                    SelectionChanged="OnSelectionChanged">
+                    <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding Text}"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           MaxLines="1"/>
+                            <Label Text="{Binding Date}"
+                           FontAttributes="Italic"
+                           TextColor="Gray"
+                           FontSize="Small"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
         </StackLayout>
 
     </ContentPage.Content>

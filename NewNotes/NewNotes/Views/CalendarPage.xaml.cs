@@ -13,6 +13,12 @@ namespace NewNotes.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CalendarPage : ContentPage
     {
+        protected override async void OnAppearing()
+        {
+            collectionView.ItemsSource = await App.NotesDB.GetNotesAsync();
+
+            base.OnAppearing();
+        }
         public string ItemId
         {
             set
@@ -29,15 +35,12 @@ namespace NewNotes.Views
 
         private /*async*/ void CalendarView_DateSelectionChanged(object sender, XCalendar.Models.DateSelectionChangedEventArgs e)
         {
-             string Selectedate = calendar.SelectedDates.Single().Date.ToString();
-             DisplayAlert("Title", Selectedate, "OK");
+            // string Selectedate = calendar.SelectedDates.Single().Date.ToString();
+            // DisplayAlert("Title", Selectedate, "OK");
 
             NotePlace.IsVisible = true;
             InputNote.Text="";
-                
-               /* Note note = (Note)e.CurrentSelection.FirstOrDefault();
-                await Shell.Current.GoToAsync(
-                    $"{nameof(CalendarPage)}?{nameof(CalendarPage.ItemId)}={note.ID.ToString()}");*/
+            
             
         }
 
@@ -69,8 +72,19 @@ namespace NewNotes.Views
             {
                 await App.NotesDB.SaveNoteAsync(note);
             }
-
             await Shell.Current.GoToAsync("..");
+            await DisplayAlert("Уведомление", "Заметка сохранена", "OK");
+            NotePlace.IsVisible = false;
+
+        }
+        private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.CurrentSelection != null)
+            {
+                Note note = (Note)e.CurrentSelection.FirstOrDefault();
+                await Shell.Current.GoToAsync(
+                    $"{nameof(NoteAddingPage)}?{nameof(NoteAddingPage.ItemId)}={note.ID.ToString()}");
+            }
         }
     }
 }
