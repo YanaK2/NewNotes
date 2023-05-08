@@ -1,24 +1,29 @@
-﻿using NewNotes.Models;
+﻿using NewNotes.Data;
+using NewNotes.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace NewNotes.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+    [QueryProperty(nameof(ItemId), nameof(ItemId))]
+
     public partial class CalendarPage : ContentPage
     {
-        protected override async void OnAppearing()
-        {
-            collectionView.ItemsSource = await App.NotesDB.GetNotesAsync();
 
-            base.OnAppearing();
-        }
+
+        protected override async void OnAppearing()
+         {
+             collectionView.ItemsSource = await App.NotesDB.GetNotesAsync();
+             base.OnAppearing();
+            
+         }
+
         public string ItemId
         {
             set
@@ -35,13 +40,15 @@ namespace NewNotes.Views
 
         private /*async*/ void CalendarView_DateSelectionChanged(object sender, XCalendar.Models.DateSelectionChangedEventArgs e)
         {
-            // string Selectedate = calendar.SelectedDates.Single().Date.ToString();
+             DateTime Selectedate = calendar.SelectedDates.Single().Date;
+            
             // DisplayAlert("Title", Selectedate, "OK");
 
             NotePlace.IsVisible = true;
             InputNote.Text="";
-            
-            
+            IdNote.Text = "0";
+
+
         }
 
         private async void LoadNote(string value)
@@ -61,13 +68,8 @@ namespace NewNotes.Views
         {
             Note note = (Note)BindingContext;
 
-            note.Date = calendar.SelectedDates.Single().Date;
-
-            if (note.Date == null) 
-            { 
-                note.Date = DateTime.Now;
-            } else note.Date = calendar.SelectedDates.Single().Date;
-
+             note.Date = calendar.SelectedDates.Single().Date;
+            note.ID =Convert.ToInt32(IdNote.Text);
             if (!string.IsNullOrWhiteSpace(note.Text))
             {
                 await App.NotesDB.SaveNoteAsync(note);
@@ -81,10 +83,34 @@ namespace NewNotes.Views
         {
             if (e.CurrentSelection != null)
             {
+                NotePlace.IsVisible = true;
                 Note note = (Note)e.CurrentSelection.FirstOrDefault();
-                await Shell.Current.GoToAsync(
-                    $"{nameof(NoteAddingPage)}?{nameof(NoteAddingPage.ItemId)}={note.ID.ToString()}");
+
+                if (note != null)
+                {  
+                    IdNote.Text = note.ID.ToString();
+                    InputNote.Text = note.Text;
+
+                }
+                    /*await Shell.Current.GoToAsync(
+                    //НЕ ВИДИТ ПУТЬ КАК ЭТО ПЕРЕДЕЛАТЬ АААААА
+                    $"{nameof(CalendarPage)}?{nameof(CalendarPage.ItemId)}={note.ID.ToString()}",
+                    InputNote.Text = note.Text
+                    );*/
             }
+        }
+
+        private async void DeleteButton_Clicked(Object sender, EventArgs e)
+        {
+            Note note = (Note)BindingContext;
+
+            await App.NotesDB.DeleteNoteAsync(note);
+
+            NotePlace.IsVisible = false;
+
+            await Shell.Current.GoToAsync("..");
+
+            await DisplayAlert("Уведомление", "Заметка удалена", "OK");
         }
     }
 }

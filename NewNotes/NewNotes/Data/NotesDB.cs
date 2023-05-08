@@ -34,6 +34,7 @@ namespace NewNotes.Data
         if(note.ID!=0)
             {
                 return db.UpdateAsync(note);
+
             }
         else
             {

@@ -30,7 +30,9 @@
                              Rows="6"
                              NavigationBackgroundColor="#79B989" />
             <StackLayout x:Name="NotePlace" IsVisible="false">
-
+                <Label x:Name="IdNote"
+                       TextColor="Black"
+                    Text="{Binding ID}"/>
                 <ScrollView>
                     <Editor x:Name="InputNote"
                         Placeholder="Текст заметки"
