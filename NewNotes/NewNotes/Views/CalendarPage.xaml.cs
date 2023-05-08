@@ -88,7 +88,7 @@ namespace NewNotes.Views
             NotePlace.IsVisible = false;
 
         }
-        private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private /*async */void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             if (e.CurrentSelection != null)

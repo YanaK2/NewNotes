@@ -1,12 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NewNotes.Views.AboutPage">
+             x:Class="NewNotes.Views.AboutPage"
+             Title="Справочная информация">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+       <ScrollView> <StackLayout Margin="15">
+
+
+                <Label FontSize="Large" TextColor="Black" HorizontalOptions="Center"  FontAttributes="Bold" VerticalTextAlignment="Center" Padding="0,0,0,10"
+                           Text="Руководство по использованию"/>
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="Center" Padding="0,0,0,10"
+                           Text="Создание заметок:"/>
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
+                           Text="• Для создания простой заметки перейдите на страницу «Заметки» и нажмите на значок «плюс»."/>
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
+                           Text="• В открывшемся окне введите необходимую заметку."/>
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
+                           Text="• Для сохранения результата нажмите на значок «галочка»."/>
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
+                           Text="• Если вы не хотите сохранять заметку, нажмите на значок «мусор»."/>
+
+
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
+                           Text="Просмотр, редактирование и удаление заметок:"/>
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
+                           Text="• Для просмотра заметки: на странице «Заметки» кликните по необходимой вам заметке и откроется просмотра и редактирования."/>
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
+                           Text="• Для редактирования заметки: на странице просмотра и редактирования внесите изменения в заметку, далее нажмите на значок «галочка»."/>
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
+                           Text="• Если вы хотите удалить заметку, в окне просмотра и редактирования нажмите на значок «мусор»."/>
+
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="Center" Padding="0,0,0,10"
+                           Text="Страница «Календарь»: "/>
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
+                           Text="•  На странице «Календарь» располагается актуальный календарь на месяц, а также список всех заметок."/>
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
+                           Text="•  Вы можете нажать на любой день календаря и появится поле для введения заметки. При ее сохранении дата заметки будет совпадать с выбранной в календаре датой."/>
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
+                           Text="• Из списка заметок вы можете выбрать необходимую, после чего она откроется для редактирования на странице календаря. При сохранении этой заметки датой заметки станет выбранный день календаря. Если день не выбран, то дата заметки будет соответствовать актуальной дате."/>
+                
+        </StackLayout> </ScrollView>
     </ContentPage.Content>
 </ContentPage>
