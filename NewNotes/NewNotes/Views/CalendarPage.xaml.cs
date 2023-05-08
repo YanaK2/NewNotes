@@ -68,7 +68,16 @@ namespace NewNotes.Views
         {
             Note note = (Note)BindingContext;
 
-             note.Date = calendar.SelectedDates.Single().Date;
+            
+            try
+            {
+                 note.Date = calendar.SelectedDates.Single().Date;
+            }
+            catch (InvalidOperationException)
+            {
+                note.Date= DateTime.Now;
+            }
+
             note.ID =Convert.ToInt32(IdNote.Text);
             if (!string.IsNullOrWhiteSpace(note.Text))
             {
@@ -81,17 +90,19 @@ namespace NewNotes.Views
         }
         private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             if (e.CurrentSelection != null)
             {
                 NotePlace.IsVisible = true;
                 Note note = (Note)e.CurrentSelection.FirstOrDefault();
-
+                
                 if (note != null)
                 {  
                     IdNote.Text = note.ID.ToString();
                     InputNote.Text = note.Text;
 
                 }
+
                     /*await Shell.Current.GoToAsync(
                     //НЕ ВИДИТ ПУТЬ КАК ЭТО ПЕРЕДЕЛАТЬ АААААА
                     $"{nameof(CalendarPage)}?{nameof(CalendarPage.ItemId)}={note.ID.ToString()}",
@@ -103,6 +114,8 @@ namespace NewNotes.Views
         private async void DeleteButton_Clicked(Object sender, EventArgs e)
         {
             Note note = (Note)BindingContext;
+
+            note.ID = Convert.ToInt32(IdNote.Text);
 
             await App.NotesDB.DeleteNoteAsync(note);
 
