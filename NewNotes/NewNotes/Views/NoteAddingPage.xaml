@@ -23,7 +23,8 @@
             <ScrollView>
             <StackLayout Margin="20">
 
-                <Editor Placeholder="Текст заметки"
+                <Editor x:Name="NoteText"
+                    Placeholder="Текст заметки"
                         PlaceholderColor="Gray"
                         Text="{Binding Text}"
                         TextColor="Black"
@@ -32,6 +33,11 @@
 
             </StackLayout>
         </ScrollView>
+            <StackLayout Orientation="Horizontal">
+            <CheckBox  IsChecked="False" x:Name="secret"/>
+            <Label TextColor="Black" FontSize="Medium" VerticalTextAlignment="Center">Скрыть заметку</Label> 
+            </StackLayout>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -13,5 +13,7 @@ namespace NewNotes.Models
 
         public DateTime Date { get; set; }
 
+        public bool SecretNote { get; set; }
+
     }
 }

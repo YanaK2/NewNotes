@@ -88,7 +88,7 @@ namespace NewNotes.Views
             NotePlace.IsVisible = false;
 
         }
-        private /*async */void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             if (e.CurrentSelection != null)
@@ -103,12 +103,13 @@ namespace NewNotes.Views
 
                 }
 
-                    /*await Shell.Current.GoToAsync(
-                    //НЕ ВИДИТ ПУТЬ КАК ЭТО ПЕРЕДЕЛАТЬ АААААА
-                    $"{nameof(CalendarPage)}?{nameof(CalendarPage.ItemId)}={note.ID.ToString()}",
-                    InputNote.Text = note.Text
-                    );*/
+                /*await Shell.Current.GoToAsync(
+                //НЕ ВИДИТ ПУТЬ КАК ЭТО ПЕРЕДЕЛАТЬ АААААА
+                $"{nameof(NoteAddingPage)}?{nameof(NoteAddingPage.ItemId)}={password.ID.ToString()}",
+                InputNote.Text = note.Text
+                );*/
             }
+
         }
 
         private async void DeleteButton_Clicked(Object sender, EventArgs e)

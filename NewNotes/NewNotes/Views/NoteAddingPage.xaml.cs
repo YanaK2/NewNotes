@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ using Xamarin.Forms.Xaml;
 
 namespace NewNotes.Views
 {
+
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public partial class NoteAddingPage : ContentPage
     {
@@ -26,6 +28,7 @@ namespace NewNotes.Views
             InitializeComponent();
 
             BindingContext = new Note();
+            
         }
 
 
@@ -38,8 +41,13 @@ namespace NewNotes.Views
                 Note note = await App.NotesDB.GetNoteAsync(id);
 
                 BindingContext = note;
+                 if (note.SecretNote == true)
+                {
+                    secret.IsChecked= true;
+                }
             }
             catch { }
+
         }
 
 
@@ -49,6 +57,8 @@ namespace NewNotes.Views
 
             note.Date = DateTime.UtcNow;
 
+            note.SecretNote = secret.IsChecked;
+            
             if (!string.IsNullOrWhiteSpace(note.Text))
             {
                 await App.NotesDB.SaveNoteAsync(note);

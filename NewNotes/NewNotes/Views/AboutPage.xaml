@@ -38,7 +38,33 @@
                            Text="•  Вы можете нажать на любой день календаря и появится поле для введения заметки. При ее сохранении дата заметки будет совпадать с выбранной в календаре датой."/>
                 <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
                            Text="• Из списка заметок вы можете выбрать необходимую, после чего она откроется для редактирования на странице календаря. При сохранении этой заметки датой заметки станет выбранный день календаря. Если день не выбран, то дата заметки будет соответствовать актуальной дате."/>
-                
-        </StackLayout> </ScrollView>
+               
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="Center" Padding="0,0,0,10"
+                           Text="Созжание закрытых заметок: "/>
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
+                           Text="•  При создании заметки можно выбрать функцию «Закрытая заметка»."/>
+                <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
+                           Text="•  Для просмотра закрытой заметки необходимо ввести пароль или код, который можно задать по кнопке ниже."/>
+                <Editor x:Name="newpass" Placeholder="Задать код" TextColor="Black" PlaceholderColor="Gray"/>
+                <Button x:Name="passwordbutton"
+                        HorizontalOptions="End" 
+                        HeightRequest="50" 
+                        BackgroundColor="#79B989"  
+                        CornerRadius="30" 
+                        Margin="5"
+                        Text="Новый код"
+                        Clicked="PasswordButton_Clicked"/>
+                <Button x:Name="changepasswordbutton"
+                        HorizontalOptions="End" 
+                        HeightRequest="50" 
+                        BackgroundColor="#79B989"  
+                        CornerRadius="30" 
+                        Margin="5"
+                        Text="Изменить код"
+                        Clicked="ChangePasswordButton_Clicked"/>
+                <Label x:Name="passview"
+                       TextColor="Black"
+                       Text="{Binding Text}"/>
+            </StackLayout> </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -40,7 +40,13 @@
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <StackLayout>
-                    <Label Text="{Binding Text}"
+                    <Label x:Name="notestatus"
+                           Text="{Binding SecretNote}"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           MaxLines="2"/>
+                    <Label x:Name="TitleText"
+                           Text="{Binding Text}"
                            TextColor="Black"
                            FontSize="Medium"
                            MaxLines="2"/>
