@@ -9,6 +9,7 @@ using NewNotes.Models;
 using Xamarin.CommunityToolkit.Extensions;
 using System.Xml.Xsl;
 using System.Security.Cryptography;
+using XCalendar.Core.Enums;
 
 namespace NewNotes.Views
 {
@@ -19,12 +20,13 @@ namespace NewNotes.Views
         public NotesPage()
         {
             InitializeComponent();
+
         }
 
         protected override async void OnAppearing()
         {
             collectionView.ItemsSource = await App.NotesDB.GetNotesAsync();
-            
+
             base.OnAppearing();
         }
 
@@ -46,9 +48,21 @@ namespace NewNotes.Views
                     $"{nameof(NoteAddingPage)}?{nameof(NoteAddingPage.ItemId)}={note.ID.ToString()}");
                 } else
                 {
-                    await DisplayPromptAsync("Это приватная заметка", "Введите код для доступа к заметке", "ОК", "Отмена");
+                    int id = 1;
+                    Password pass = await App.NotesDB.GetPasswordAsync(id);
+                    string CheckPass = await DisplayPromptAsync("Это приватная заметка", "Введите код доступа", "Ок", "Отмена");
+                    if (CheckPass == null || CheckPass != pass.Text)
+                    {   
+                        await DisplayAlert("Неверный код", "Повторите попытку", "Ок");
+                        OnAppearing();
+                        
+                        
+                    } else
+                    {
                     await Shell.Current.GoToAsync(
-                     $"{nameof(NoteAddingPage)}?{nameof(NoteAddingPage.ItemId)}={note.ID.ToString()}");
+                    $"{nameof(NoteAddingPage)}?{nameof(NoteAddingPage.ItemId)}={note.ID.ToString()}");
+                    }
+                   
 
                 }
                 

@@ -86,6 +86,7 @@ namespace NewNotes.Views
             await Shell.Current.GoToAsync("..");
             await DisplayAlert("Уведомление", "Заметка сохранена", "OK");
             NotePlace.IsVisible = false;
+            OnAppearing();
 
         }
         private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -95,13 +96,33 @@ namespace NewNotes.Views
             {
                 NotePlace.IsVisible = true;
                 Note note = (Note)e.CurrentSelection.FirstOrDefault();
-                
-                if (note != null)
-                {  
-                    IdNote.Text = note.ID.ToString();
-                    InputNote.Text = note.Text;
+                if (note.SecretNote == false) 
+                {
+                    if (note != null)
+                    {
+                        IdNote.Text = note.ID.ToString();
+                        InputNote.Text = note.Text;
+                        OnAppearing();
+                    }
+                } else
+                {
+                    int id = 1;
+                    Password pass = await App.NotesDB.GetPasswordAsync(id);
+                    string CheckPass = await DisplayPromptAsync("Это приватная заметка", "Введите код доступа", "Ок", "Отмена");
+                    if (CheckPass == null || CheckPass != pass.Text)
+                    {
+                        await DisplayAlert("Неверный код", "Повторите попытку", "Ок");
+                        OnAppearing();
 
+                    }
+                    else
+                    {
+                        IdNote.Text = note.ID.ToString();
+                        InputNote.Text = note.Text;
+                        OnAppearing();
+                    }
                 }
+                
 
                 /*await Shell.Current.GoToAsync(
                 //НЕ ВИДИТ ПУТЬ КАК ЭТО ПЕРЕДЕЛАТЬ АААААА
@@ -125,6 +146,7 @@ namespace NewNotes.Views
             await Shell.Current.GoToAsync("..");
 
             await DisplayAlert("Уведомление", "Заметка удалена", "OK");
+            OnAppearing();
         }
     }
 }
