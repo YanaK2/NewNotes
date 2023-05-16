@@ -48,9 +48,8 @@ namespace NewNotes.Views
             NotePlace.IsVisible = true;
             InputNote.Text="";
             IdNote.Text = "0";
-            IdNote.Text = "";
-            TitleNote.Text = "";
-            SecretNote.Text = "";
+            TitleNote.Text = "Заметка из календаря";
+            SecretNote.Text = "false";
 
 
         }
@@ -115,29 +114,38 @@ namespace NewNotes.Views
                         InputNote.Text = note.Text;
                         TitleNote.Text = note.Title;
                         SecretNote.Text = note.SecretNote.ToString();
-                        OnAppearing();
+                        
                     }
                 } else
                 {
                     NotePlace.IsVisible = false;
-                    int id = 1;
-                    Password pass = await App.NotesDB.GetPasswordAsync(id);
-                    string CheckPass = await DisplayPromptAsync("Это приватная заметка", "Введите код доступа", "Ок", "Отмена");
-                    if (CheckPass == null || CheckPass != pass.Text)
+                    try
                     {
-                        await DisplayAlert("Неверный код", "Повторите попытку", "Ок");
-                        NotePlace.IsVisible = false;
-                        OnAppearing();
+                        int id = 1;
+                        Password pass = await App.NotesDB.GetPasswordAsync(id);
+                        string CheckPass = await DisplayPromptAsync("Это приватная заметка", "Введите код доступа", "Ок", "Отмена");
+                        if (CheckPass == null || CheckPass != pass.Text)
+                        {
+                            await DisplayAlert("Неверный код", "Повторите попытку", "Ок");
+                            NotePlace.IsVisible = false;
+                            OnAppearing();
 
+                        }
+                        else if (CheckPass == pass.Text)
+                        {
+                            NotePlace.IsVisible = true;
+                            IdNote.Text = note.ID.ToString();
+                            InputNote.Text = note.Text;
+                            TitleNote.Text = note.Title;
+                            SecretNote.Text = note.SecretNote.ToString();
+                        }
                     }
-                    else if(CheckPass==pass.Text)
+                    catch(NullReferenceException) 
                     {
-                        NotePlace.IsVisible = true;
-                        IdNote.Text = note.ID.ToString();
-                        InputNote.Text = note.Text;
-                        TitleNote.Text = note.Title;
-                        SecretNote.Text=note.SecretNote.ToString();
+                        await DisplayAlert("Вы не задали код","Нет доступа к закрытой заметке. Чтобы установить пароль перейдите на страницу Инфо","Ок");
                     }
+                    
+                    
                 }
               
             }

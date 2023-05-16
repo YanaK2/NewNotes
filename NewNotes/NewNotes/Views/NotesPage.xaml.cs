@@ -48,6 +48,8 @@ namespace NewNotes.Views
                     $"{nameof(NoteAddingPage)}?{nameof(NoteAddingPage.ItemId)}={note.ID.ToString()}");
                 } else
                 {
+                    try
+                    {
                     int id = 1;
                     Password pass = await App.NotesDB.GetPasswordAsync(id);
                     string CheckPass = await DisplayPromptAsync("Это приватная заметка", "Введите код доступа", "Ок", "Отмена");
@@ -62,7 +64,13 @@ namespace NewNotes.Views
                     await Shell.Current.GoToAsync(
                     $"{nameof(NoteAddingPage)}?{nameof(NoteAddingPage.ItemId)}={note.ID.ToString()}");
                     }
-                   
+                    }
+                    catch (NullReferenceException) 
+                    {
+                        await DisplayAlert("Вы не задали код", "Нет доступа к закрытой заметке. Чтобы установить пароль перейдите на страницу Инфо", "Ок");
+                    }
+
+
 
                 }
                 
