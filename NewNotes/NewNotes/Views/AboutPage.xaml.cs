@@ -32,23 +32,14 @@ namespace NewNotes.Views
                 } else 
                 {
                     passwordbutton.IsVisible = true;
-                    changepasswordbutton.IsVisible = true;
+                    changepasswordbutton.IsVisible = false;
                 }
             } catch(NullReferenceException) 
             {
                 passwordbutton.IsVisible = true;
                 changepasswordbutton.IsVisible = true;
             }
-           /* if (pass.Text != null)
-            {
-                passwordbutton.IsVisible = false;
-                changepasswordbutton.IsVisible = true;
-                newpass.Placeholder = "Изменить пароль";
-            } else
-            {
-                passwordbutton.IsVisible=true;
-                changepasswordbutton.IsVisible=false;
-            }*/
+          
             base.OnAppearing();
 
         }
