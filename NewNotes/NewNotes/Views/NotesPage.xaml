@@ -41,7 +41,7 @@
             <DataTemplate>
                 <StackLayout>
                     <Label x:Name="TitleText"
-                           Text="{Binding Text}"
+                           Text="{Binding Title}"
                            TextColor="Black"
                            FontSize="Medium"
                            MaxLines="2"/>

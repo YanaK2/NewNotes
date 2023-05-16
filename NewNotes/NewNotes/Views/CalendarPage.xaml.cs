@@ -79,6 +79,8 @@ namespace NewNotes.Views
             }
 
             note.ID =Convert.ToInt32(IdNote.Text);
+            note.Title = TitleNote.Text;
+            note.SecretNote= Convert.ToBoolean(SecretNote.Text);
             if (!string.IsNullOrWhiteSpace(note.Text))
             {
                 await App.NotesDB.SaveNoteAsync(note);
@@ -119,16 +121,12 @@ namespace NewNotes.Views
                     {
                         IdNote.Text = note.ID.ToString();
                         InputNote.Text = note.Text;
+                        TitleNote.Text = note.Title;
+                        SecretNote.Text=note.SecretNote.ToString();
                         OnAppearing();
                     }
                 }
-                
-
-                /*await Shell.Current.GoToAsync(
-                //НЕ ВИДИТ ПУТЬ КАК ЭТО ПЕРЕДЕЛАТЬ АААААА
-                $"{nameof(NoteAddingPage)}?{nameof(NoteAddingPage.ItemId)}={password.ID.ToString()}",
-                InputNote.Text = note.Text
-                );*/
+              
             }
 
         }

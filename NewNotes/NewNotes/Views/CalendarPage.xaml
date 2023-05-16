@@ -34,6 +34,14 @@
                        TextColor="Black"
                     Text="{Binding ID}"
                        IsVisible="false"/>
+                <Label x:Name="SecretNote"
+                       TextColor="Black"
+                    Text="{Binding SecretNote}"
+                       IsVisible="false"/>
+                <Label x:Name="TitleNote"
+                       TextColor="Black"
+                    Text="{Binding Title}"
+                       IsVisible="false"/>
                 <ScrollView>
                     <Editor x:Name="InputNote"
                         Placeholder="Текст заметки"
@@ -74,7 +82,7 @@
                     <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Label Text="{Binding Text}"
+                            <Label Text="{Binding Title}"
                            TextColor="Black"
                            FontSize="Medium"
                            MaxLines="1"/>

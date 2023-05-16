@@ -57,6 +57,8 @@ namespace NewNotes.Views
 
             note.Date = DateTime.UtcNow;
 
+            note.Title = NoteTitle.Text;
+
             note.SecretNote = secret.IsChecked;
             
             if (!string.IsNullOrWhiteSpace(note.Text))

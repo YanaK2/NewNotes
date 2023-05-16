@@ -17,10 +17,29 @@ namespace NewNotes.Views
     {
         protected override async void OnAppearing()
         {
-            int id = 1;
+            
+            
+            try
+            {
+                int id = 1;
 
-            Password pass = await App.NotesDB.GetPasswordAsync(id);
-            if (pass.Text != null)
+                Password pass = await App.NotesDB.GetPasswordAsync(id);
+                if (pass.Text != null)
+                {
+                    passwordbutton.IsVisible = false;
+                    changepasswordbutton.IsVisible = true;
+                    newpass.Placeholder = "Изменить пароль";
+                } else 
+                {
+                    passwordbutton.IsVisible = true;
+                    changepasswordbutton.IsVisible = true;
+                }
+            } catch(NullReferenceException) 
+            {
+                passwordbutton.IsVisible = true;
+                changepasswordbutton.IsVisible = true;
+            }
+           /* if (pass.Text != null)
             {
                 passwordbutton.IsVisible = false;
                 changepasswordbutton.IsVisible = true;
@@ -29,7 +48,7 @@ namespace NewNotes.Views
             {
                 passwordbutton.IsVisible=true;
                 changepasswordbutton.IsVisible=false;
-            }
+            }*/
             base.OnAppearing();
 
         }
@@ -44,9 +63,14 @@ namespace NewNotes.Views
         {
             Password password = new Password();
             password.Text = newpass.Text;
-            password.ID = 1;
             await App.NotesDB.SavePasswordAsync(password);
             Console.WriteLine(password.ID);
+            newpass.Text = "";
+            int id = 1;
+
+            Password pass = await App.NotesDB.GetPasswordAsync(id);
+            Console.WriteLine(pass.Text);
+            OnAppearing();
             
         }
         //смена пароля 
