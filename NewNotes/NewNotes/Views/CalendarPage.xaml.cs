@@ -20,6 +20,7 @@ namespace NewNotes.Views
         protected override async void OnAppearing()
          {
              collectionView.ItemsSource = await App.NotesDB.GetNotesAsync();
+            NotePlace.IsVisible = false;
              base.OnAppearing();
             
          }
@@ -96,34 +97,39 @@ namespace NewNotes.Views
 
             if (e.CurrentSelection != null)
             {
-                NotePlace.IsVisible = true;
+               
                 Note note = (Note)e.CurrentSelection.FirstOrDefault();
                 if (note.SecretNote == false) 
                 {
                     if (note != null)
                     {
+                        NotePlace.IsVisible = true;
                         IdNote.Text = note.ID.ToString();
                         InputNote.Text = note.Text;
+                        TitleNote.Text = note.Title;
+                        SecretNote.Text = note.SecretNote.ToString();
                         OnAppearing();
                     }
                 } else
                 {
+                    NotePlace.IsVisible = false;
                     int id = 1;
                     Password pass = await App.NotesDB.GetPasswordAsync(id);
                     string CheckPass = await DisplayPromptAsync("Это приватная заметка", "Введите код доступа", "Ок", "Отмена");
                     if (CheckPass == null || CheckPass != pass.Text)
                     {
                         await DisplayAlert("Неверный код", "Повторите попытку", "Ок");
+                        NotePlace.IsVisible = false;
                         OnAppearing();
 
                     }
-                    else
+                    else if(CheckPass==pass.Text)
                     {
+                        NotePlace.IsVisible = true;
                         IdNote.Text = note.ID.ToString();
                         InputNote.Text = note.Text;
                         TitleNote.Text = note.Title;
                         SecretNote.Text=note.SecretNote.ToString();
-                        OnAppearing();
                     }
                 }
               

@@ -17,8 +17,6 @@ namespace NewNotes.Views
     {
         protected override async void OnAppearing()
         {
-            
-            
             try
             {
                 int id = 1;

@@ -61,10 +61,12 @@
                         CornerRadius="30" 
                         Margin="5"
                         Text="Изменить код"
+                        IsVisible="false"
                         Clicked="ChangePasswordButton_Clicked"/>
                 <Label x:Name="passview"
                        TextColor="Black"
-                       Text="{Binding Text}"/>
+                       Text="{Binding Text}"
+                       IsVisible="false"/>
             </StackLayout> </ScrollView>
     </ContentPage.Content>
 </ContentPage>
