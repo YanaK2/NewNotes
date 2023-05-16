@@ -48,6 +48,9 @@ namespace NewNotes.Views
             NotePlace.IsVisible = true;
             InputNote.Text="";
             IdNote.Text = "0";
+            IdNote.Text = "";
+            TitleNote.Text = "";
+            SecretNote.Text = "";
 
 
         }
@@ -89,6 +92,10 @@ namespace NewNotes.Views
             await Shell.Current.GoToAsync("..");
             await DisplayAlert("Уведомление", "Заметка сохранена", "OK");
             NotePlace.IsVisible = false;
+            IdNote.Text = "";
+            InputNote.Text = "";
+            TitleNote.Text = "";
+            SecretNote.Text = "";
             OnAppearing();
 
         }
@@ -146,6 +153,10 @@ namespace NewNotes.Views
             await App.NotesDB.DeleteNoteAsync(note);
 
             NotePlace.IsVisible = false;
+            IdNote.Text ="";
+            InputNote.Text = "";
+            TitleNote.Text = "";
+            SecretNote.Text = "";
 
             await Shell.Current.GoToAsync("..");
 
