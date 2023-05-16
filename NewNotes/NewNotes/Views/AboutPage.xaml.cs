@@ -37,7 +37,7 @@ namespace NewNotes.Views
             } catch(NullReferenceException) 
             {
                 passwordbutton.IsVisible = true;
-                changepasswordbutton.IsVisible = true;
+                changepasswordbutton.IsVisible = false;
             }
           
             base.OnAppearing();
