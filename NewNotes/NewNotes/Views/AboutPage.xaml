@@ -40,7 +40,7 @@
                            Text="• Из списка заметок вы можете выбрать необходимую, после чего она откроется для редактирования на странице календаря. При сохранении этой заметки датой заметки станет выбранный день календаря. Если день не выбран, то дата заметки будет соответствовать актуальной дате."/>
                
                 <Label FontSize="Medium" TextColor="Black" HorizontalOptions="Center" Padding="0,0,0,10"
-                           Text="Созжание закрытых заметок: "/>
+                           Text="Создание закрытых заметок: "/>
                 <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
                            Text="•  При создании заметки можно выбрать функцию «Закрытая заметка»."/>
                 <Label FontSize="Medium" TextColor="Black" HorizontalOptions="FillAndExpand" Padding="0,0,0,10"
